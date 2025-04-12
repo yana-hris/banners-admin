@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <title>Админ Панел - Банери</title>
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles-grid-4.css" />
   </head>
   <body>
     <div class="container">
@@ -11,14 +11,26 @@
       <div id="banners-container"></div>
 
       <button id="addBannerBtn">Добави банер</button>
+      <!-- only for grid-4 -->
+      <button id="previewAllBtn" onclick="openModal()">
+        Преглед всички банери
+      </button>
     </div>
-    <div id="previewModal" class="modal" onclick="closeModal()">
+    <!-- <div id="previewModal" class="modal" onclick="closeModal()"> // for dynamic banners
       <img id="modalImage" src="" alt="Preview" />
+    </div> -->
+
+    <div id="previewModal" class="modal" onclick="closeModal()">
+      <div
+        id="modalImageRow"
+        class="modal-row"
+        onclick="event.stopPropagation()"
+      ></div>
     </div>
 
     <!-- SortableJS -->
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
     <!-- Custom script -->
-    <script src="script.js"></script>
+    <script src="script-grid-4.js" defer></script>
   </body>
 </html>

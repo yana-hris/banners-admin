@@ -18,7 +18,6 @@ function createBannerElement(id) {
             <input type="hidden" class="sequenceInput" name="Banners[${id}].Sequence" value="${id}">
             <div class="button-group">
                 <button class="save-btn" disabled>Запази</button>
-                <button class="preview-btn">Преглед</button>
                 <button class="delete-btn">Изтрий</button>
             </div>
         </div>
@@ -28,7 +27,6 @@ function createBannerElement(id) {
   const imgPreview = banner.querySelector(".imagePreview");
   const saveBtn = banner.querySelector(".save-btn");
   const deleteBtn = banner.querySelector(".delete-btn");
-  const previewBtn = banner.querySelector(".preview-btn");
   const inputs = banner.querySelectorAll("input");
 
   fileInput.addEventListener("change", () => {
@@ -59,14 +57,8 @@ function createBannerElement(id) {
   });
 
   // Преглед на банера в модален прозорец
-  previewBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    const src = imgPreview.src;
-    if (src && src !== placeholderImage) {
-      openModal(src);
-    } else {
-      alert("Няма качено изображение за преглед.");
-    }
+  document.getElementById("previewAllBtn").addEventListener("click", () => {
+    openModal();
   });
 
   // Симулирано запазване
@@ -112,7 +104,7 @@ document.getElementById("addBannerBtn").click();
 
 // Drag & drop
 new Sortable(document.getElementById("banners-container"), {
-  animation: 150,
+  animation: 0,
   handle: ".drag-handle",
   ghostClass: "sortable-ghost",
   onEnd: () => {
@@ -121,15 +113,27 @@ new Sortable(document.getElementById("banners-container"), {
 });
 
 // Modal функции
-function openModal(src) {
+function openModal() {
   const modal = document.getElementById("previewModal");
-  const modalImage = document.getElementById("modalImage");
-  modalImage.src = src;
+  const modalRow = document.getElementById("modalImageRow");
+  modalRow.innerHTML = "";
+
+  const banners = document.querySelectorAll("#banners-container .banner");
+
+  banners.forEach((banner, index) => {
+    const img = banner.querySelector(".imagePreview");
+    if (img && img.src && !img.src.includes("placeholder")) {
+      const previewImg = document.createElement("img");
+      previewImg.src = img.src;
+      previewImg.alt = `Банер ${index + 1}`;
+      modalRow.appendChild(previewImg);
+    }
+  });
+
   modal.classList.add("show");
 }
 
 function closeModal() {
-  const modal = document.getElementById("previewModal");
-  modal.classList.remove("show");
-  document.getElementById("modalImage").src = "";
+  document.getElementById("previewModal").classList.remove("show");
+  document.getElementById("modalImageRow").innerHTML = "";
 }
