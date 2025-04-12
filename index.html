@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="bg">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Админ Панел - Банери</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Банери</h1>
+      <div id="banners-container"></div>
+
+      <button id="addBannerBtn">Добави банер</button>
+    </div>
+    <div id="previewModal" class="modal" onclick="closeModal()">
+      <img id="modalImage" src="" alt="Preview" />
+    </div>
+
+    <!-- SortableJS -->
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+    <!-- Custom script -->
+    <script src="script.js"></script>
+  </body>
+</html>

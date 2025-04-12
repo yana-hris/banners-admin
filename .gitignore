@@ -1,0 +1,14 @@
+# Node / build
+node_modules/
+dist/
+build/
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# VS Code settings (ако ползваш)
+.vscode/
